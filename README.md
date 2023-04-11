@@ -21,16 +21,28 @@ L'application MVP LitReview permet de :
 * Le projet est développé avec le framework Django. 
 * Les données sont sauvegardées dans une base de données sqlite3.
 
-## Installation
+## Creation d'un environnement virtuel
 * -> Télécharger le package de l'application depuis github : git clone https://github.com/Slb59/Oc-P9.git
-* -> Creer un environnement virtuel (Si besoin installer pipenv: pip install pipenv) :
+* -> Creer un environnement virtuel
+``` bash
+python -m venv .venv
+```
+* -> Activer l'environnement virtuel : .venv\Scripts\activate.bat
+* -> Installer la dernière version de pip: python -m pip install --upgrade pip
+* -> Installer les bibliothèques externes de Python: pip install -r requirements.txt
+
+## Creation d'un environnement virtuel avec pipenv
+* -> Télécharger le package de l'application depuis github : git clone https://github.com/Slb59/Oc-P9.git
+* -> Creer un environnement virtuel avec pipenv (Si besoin installer pipenv: pip install pipenv) :
 ``` bash
 cd Op-P9
 mkdir .venv
 pipenv install
 ```
-## Utilisation
 * -> Activer l'environnement virtuel : pipenv shell
+
+## Utilisation
+
 * -> Lancer le serveur:
 ```bash
 cd litreview
