@@ -49,6 +49,6 @@ python manage.py runserver
 * -> Depuis votre navigateur, vous accédez à l'application via : http:/127.0.0.1:8000
 * -> Créez un compte pour pouvoir vous connecter et accéder au site.
 * -> Le mot de passe doit avoir au moins 8 caractères, des chiffres dans le désordre et des lettres. Il ne doit pas être commun.
-* -> Pour accéder à l'administration de django http://127.0.0.1:8000/admin
-* -> Pour créer un nouvel administrateur dans le terminal python manage.py createsuperuser
+* -> Pour accéder à l'administration de django: http://127.0.0.1:8000/admin
+* -> Pour créer un nouvel administrateur dans le terminal: python manage.py createsuperuser
 
