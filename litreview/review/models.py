@@ -15,7 +15,10 @@ class Ticket(models.Model):
 class Review(models.Model):
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(
-        max_length=1024,
+        # max_length=1024,
+        # WARNINGS:
+        # review.Review.rating: (fields.W122) 'max_length' is ignored when used with PositiveSmallIntegerField.
+        #         HINT: Remove 'max_length' from field
         # validates that rating must be between 0 and 5
         validators=[MinValueValidator(0), MaxValueValidator(5)])
     headline = models.CharField(max_length=128)
