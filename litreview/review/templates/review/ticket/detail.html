@@ -1,0 +1,9 @@
+{% extends "review/base.html" %}
+{% block title %}{{ ticket.title }}{% endblock %}
+{% block content %}
+ <h1>{{ ticket.title }}</h1>
+ <p class="date">
+ Créé le {{ ticket.time_created }} by {{ ticket.user }}
+ </p>
+ {{ ticket.description|linebreaks }}
+{% endblock %}
