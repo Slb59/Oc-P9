@@ -17,4 +17,18 @@ h1 {
   color: rgb(10, 9, 8);
 }
 
+footer {
+  background-color: rgba(246, 177, 73, 0.8);
+  padding: 1rem;
+  position: relative;
+  height: 30px;
+}
+footer .footer__logo {
+  position: absolute;
+  height: 55px;
+  left: 50%;
+  transform: translate(-50%);
+  transform: translateY(-22%);
+}
+
 /*# sourceMappingURL=review.css.map */

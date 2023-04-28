@@ -1,0 +1,13 @@
+footer {
+    background-color: rgba($color-footer-header-background,$block-transparency);
+    padding: 1rem;
+    position: relative;
+    height: 30px;
+    .footer__logo {
+        position: absolute;
+        height: 55px;
+        left: 50%;
+        transform: translate(-50%);
+        transform: translateY(-22%);
+    }
+}
