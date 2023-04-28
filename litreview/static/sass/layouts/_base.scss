@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'Raleway-Light';
+    src: url('../assets/Raleway-Light.ttf');
+}
+html {
+    background: $color-background;
+    background: linear-gradient(333deg, $color-background 0%, $color-background-gradient1 76%, $color-background-gradient2 100%);
+    font-family: 'Raleway-Light';
+    color: $color-font;
+    min-height: 100vh;
+    scroll-behavior:smooth;
+    overflow-x:hidden;
+}
+h1 {
+    font-size: $fontsize-title;
+    color: $color-font;
+}

@@ -1,0 +1,11 @@
+{
+  "name": "litreview",
+  "version": "1.0.0",
+  "description": "litreview application",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/review.scss:./css/review.css"
+  },
+  "author": "",
+  "license": "ISC"
+}
