@@ -1,0 +1,46 @@
+header {
+    background-color: rgba($color-footer-header-background,$block-transparency);
+    padding: 1rem;
+    height: 30px;
+    display: grid;
+	grid-template-columns: repeat(3, 1fr);
+    margin: 10px auto;
+    
+    
+
+    .header__btn {
+        background-color: $color-btn;
+        color: $color-font;
+        padding: 5px 15px;
+        border-radius: 1rem;
+        
+
+        &:hover {
+            background-color: $color-btn-hover;
+          }
+      }
+    
+    .header__menu {       
+        
+        padding-top: 0em;
+        padding-right: 0em;
+        grid-column: 4;
+        margin: auto 1em;
+        align-content: center;
+        text-align: right;   
+        transform: translateY(-120%);
+
+        ul{
+            margin: 0;
+        }
+        
+        li {
+            display: inline;
+            padding-left: 0.5em;           
+
+            a {
+                text-decoration: none;
+            }
+        }
+    }
+}

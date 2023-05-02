@@ -14,14 +14,20 @@ html {
 
 h1 {
   font-size: 2rem;
-  color: rgb(10, 9, 8);
+  color: rgb(11, 31, 101);
 }
 
 footer {
   background-color: rgba(246, 177, 73, 0.8);
   padding: 1rem;
-  position: relative;
   height: 30px;
+  position: relative;
+}
+footer .footer__link {
+  color: rgb(10, 9, 8);
+}
+footer .footer__link:hover {
+  color: rgb(11, 31, 101);
 }
 footer .footer__logo {
   position: absolute;
@@ -29,6 +35,59 @@ footer .footer__logo {
   left: 50%;
   transform: translate(-50%);
   transform: translateY(-22%);
+}
+footer .footer__menu {
+  position: absolute;
+  left: 70%;
+  transform: translate(100%);
+  transform: translateY(-22%);
+}
+footer .footer__menu ul {
+  margin: 0;
+}
+footer .footer__menu li {
+  list-style-image: linear-gradient(to left bottom, rgb(217, 217, 217), rgb(173, 161, 161));
+  padding: 0.2rem;
+}
+footer .footer__menu li a {
+  text-decoration: none;
+}
+
+header {
+  background-color: rgba(246, 177, 73, 0.8);
+  padding: 1rem;
+  height: 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 10px auto;
+}
+header .header__btn {
+  background-color: rgb(217, 217, 217);
+  color: rgb(10, 9, 8);
+  padding: 5px 15px;
+  border-radius: 1rem;
+}
+header .header__btn:hover {
+  background-color: rgb(173, 161, 161);
+}
+header .header__menu {
+  padding-top: 0em;
+  padding-right: 0em;
+  grid-column: 4;
+  margin: auto 1em;
+  align-content: center;
+  text-align: right;
+  transform: translateY(-120%);
+}
+header .header__menu ul {
+  margin: 0;
+}
+header .header__menu li {
+  display: inline;
+  padding-left: 0.5em;
+}
+header .header__menu li a {
+  text-decoration: none;
 }
 
 /*# sourceMappingURL=review.css.map */

@@ -7,6 +7,13 @@
     </head>
 
     <body>
+        <header id="header">
+            <h1>LITREVIEW</h1>
+            <nav class="header__menu">
+                {% include 'navbar.html' %}                
+            </nav>
+        </header>
+
         <main>
             <div id="content">
             {% block content %}
@@ -15,9 +22,11 @@
         </main>
         
 
-        <footer id="footer">
+        <footer id="footer" class="footer">
             <img class="footer__logo" src="{% static "assets/logo.png" %}" alt="logo Litreview">
-     
+            <nav class="footer__menu">
+                {% include 'footer_navbar.html' %}                
+            </nav>
         </footer>
 
     </body>
