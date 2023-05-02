@@ -3,7 +3,7 @@
   src: url("../assets/Raleway-Light.ttf");
 }
 html {
-  background: red;
+  background: linear-gradient(333deg, rgb(144, 115, 66) 0%, rgb(204, 125, 77) 76%, rgb(232, 242, 31) 100%);
   font-family: "Raleway-Light";
   color: rgb(10, 9, 8);
   min-height: 100vh;
@@ -14,6 +14,20 @@ html {
 h1 {
   font-size: 2rem;
   color: rgb(11, 31, 101);
+}
+
+.btn {
+  background-color: rgb(217, 217, 217);
+  color: rgb(10, 9, 8);
+  padding: 5px 15px;
+  border-radius: 1rem;
+}
+.btn:hover {
+  background-color: rgb(173, 161, 161);
+}
+
+.div_title {
+  background-color: rgb(125, 161, 215);
 }
 
 footer {
@@ -60,15 +74,6 @@ header {
   grid-template-columns: repeat(3, 1fr);
   margin: 10px auto;
 }
-header .header__btn {
-  background-color: rgb(217, 217, 217);
-  color: rgb(10, 9, 8);
-  padding: 5px 15px;
-  border-radius: 1rem;
-}
-header .header__btn:hover {
-  background-color: rgb(173, 161, 161);
-}
 header .header__menu {
   padding-top: 0em;
   padding-right: 0em;
@@ -87,6 +92,23 @@ header .header__menu li {
 }
 header .header__menu li a {
   text-decoration: none;
+}
+
+.login_and_signup {
+  padding: 1rem;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 10px auto;
+}
+.login_and_signup .signup {
+  grid-column: 1;
+}
+.login_and_signup .login {
+  grid-column: 2;
+  padding: 1em;
+  align-content: center;
+  text-align: center;
 }
 
 /*# sourceMappingURL=review.css.map */

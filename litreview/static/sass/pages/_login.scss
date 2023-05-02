@@ -1,0 +1,19 @@
+.login_and_signup {
+    padding: 1rem; 
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 10px auto;
+
+    .signup{
+        grid-column: 1;
+    }
+
+    .login{
+        grid-column: 2;
+        padding: 1em;
+        align-content: center;
+        text-align: center;
+    }
+
+}

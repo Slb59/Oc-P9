@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class = 'login_and_signup'>
+        <div class = 'signup'>
+            <div class = 'div_title'>Inscivez-vous maintenant</div>
+            <a class="btn" href="">s'inscrire</a>
+        </div>
+        <div class = 'login'>
+            <div class = 'div_title'>Connectez-vous</div>
+            <form method="post">
+                
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn" type="submit" >Se connecter</button>
+            </form>
+            <div>
+                {% for message in messages%}
+                    <p id="messages">{{message}}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
