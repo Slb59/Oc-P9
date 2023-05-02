@@ -1,18 +1,4 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-    <head>
-    <title>{% block title %}{% endblock %}</title>
-    <link href="{% static "css/review.css" %}" rel="stylesheet">
-    </head>
-
-    <body>
-        <header id="header">
-            <h1>LITREVIEW</h1>
-            <nav class="header__menu">
-                {% include 'navbar.html' %}                
-            </nav>
-        </header>
+{% include "header.html"%}
 
         <main>
             <div id="content">
@@ -21,13 +7,4 @@
             </div>
         </main>
         
-
-        <footer id="footer" class="footer">
-            <img class="footer__logo" src="{% static "assets/logo.png" %}" alt="logo Litreview">
-            <nav class="footer__menu">
-                {% include 'footer_navbar.html' %}                
-            </nav>
-        </footer>
-
-    </body>
-</html>
+{% include "footer.html"%}

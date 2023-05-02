@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>{% block title %}{% endblock %}</title>
+    <!-- <link href="{% static "css/review.css" %}" rel="stylesheet"> -->
+    <link href="../static/css/review.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <header id="header">
+            <h1>LITREVIEW</h1>
+            <nav class="header__menu">
+                {% include 'navbar.html' %}                
+            </nav>
+        </header>

@@ -3,8 +3,7 @@
   src: url("../assets/Raleway-Light.ttf");
 }
 html {
-  background: rgb(144, 115, 66);
-  background: linear-gradient(333deg, rgb(144, 115, 66) 0%, rgb(204, 125, 77) 76%, rgb(232, 242, 31) 100%);
+  background: red;
   font-family: "Raleway-Light";
   color: rgb(10, 9, 8);
   min-height: 100vh;
