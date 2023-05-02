@@ -2,9 +2,12 @@
 {% block content %}
     <div class = 'login_and_signup'>
         <div class = 'signup'>
-            <div class = 'div_title'>Inscivez-vous maintenant</div>
-            <div><button class="btn" type="submit" >S'inscrire</button></div>
-            <!-- <a class="btn" href="">s'inscrire</a> -->
+            <div class = 'div_title'>Inscrivez-vous maintenant</div>
+            <div>
+                <a href="{% url 'account:signup' %}">
+                    <button class="btn" type="submit" >S'inscrire</button>
+                </a>
+            </div>
         </div>
         <div class = 'login'>
             <div class = 'div_title'>Connectez-vous</div>

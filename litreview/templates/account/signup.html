@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class = 'div_title'>Inscrivez-vous</div>
+    <div class = 'div_form'>
+        <form method="post">            
+            {% csrf_token %}
+            {{form.username}}
+            {{form.password1}}
+            {{form.password2}}
+            <div><button class="btn" type="submit" >S'inscrire</button></div>
+        </form>
+    </div>
+{% endblock %}

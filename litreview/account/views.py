@@ -1,7 +1,16 @@
 from django.shortcuts import render, redirect
-from .forms import LoginUser
+from .forms import LoginUser, CreateUser
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
+
+
+def signup(request):
+    """ post the signup data """
+    form = CreateUser()
+    if request.method == 'POST':
+        pass
+    return render(request, 'account/signup.html',
+                  context={'form': form})
 
 
 def logout_user(request):

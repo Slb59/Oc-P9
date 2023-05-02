@@ -33,6 +33,7 @@ div {
 .div_title {
   background-color: rgb(125, 161, 215);
   padding: 0rem;
+  text-align: center;
 }
 
 form {
