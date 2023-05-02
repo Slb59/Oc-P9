@@ -17,6 +17,10 @@ h1 {
     color: $color-font-h1;
 }
 
+div{
+    padding: 0.5rem;
+}
+
 .btn {
     background-color: $color-btn;
     color: $color-font;
@@ -29,6 +33,13 @@ h1 {
       }
   }
 
-  .div_title {
+.div_title {
     background-color: $color-divtitle-background;
+    padding: 0rem;
   }
+
+form {
+    display: flex;
+    flex-direction: column;
+    padding:1rem;
+}

@@ -1,6 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from .models import Ticket
+from django.contrib.auth.decorators import login_required
+
+
+@login_required(login_url='account/login')
+def feed(request):
+    """ display tickets and reviews """
+    tickets = Ticket.objects.all()
+    return render(request, 'review/feed.html', {'tickets': tickets})
 
 
 def ticket_detail(request, id):

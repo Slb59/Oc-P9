@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    {% for message in messages%}
+        <p id="messages">{{message}}</p>
+    {% endfor %}
+</div>
+
+<div class="feed__buttons">
+    <a href=""> <input class='btn' type="button" value="Demander une critique"> </a>
+    <a href=""> <input class= 'btn' type="button" value="Créer une critique"> </a>
+</div>
+
+{% endblock %}

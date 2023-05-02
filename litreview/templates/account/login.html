@@ -3,16 +3,20 @@
     <div class = 'login_and_signup'>
         <div class = 'signup'>
             <div class = 'div_title'>Inscivez-vous maintenant</div>
-            <a class="btn" href="">s'inscrire</a>
+            <div><button class="btn" type="submit" >S'inscrire</button></div>
+            <!-- <a class="btn" href="">s'inscrire</a> -->
         </div>
         <div class = 'login'>
             <div class = 'div_title'>Connectez-vous</div>
-            <form method="post">
-                
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button class="btn" type="submit" >Se connecter</button>
-            </form>
+            <div class = 'div_form'>
+                <form method="post">
+                    
+                    {% csrf_token %}
+                    {{form.username}}
+                    {{form.password}}
+                    <div><button class="btn" type="submit" >Se connecter</button></div>
+                </form>
+            </div>
             <div>
                 {% for message in messages%}
                     <p id="messages">{{message}}</p>
