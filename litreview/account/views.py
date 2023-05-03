@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render, redirect
 from .forms import LoginUser, CreateUser
 from django.contrib.auth import login, authenticate, logout
@@ -8,7 +9,16 @@ def signup(request):
     """ post the signup data """
     form = CreateUser()
     if request.method == 'POST':
-        pass
+        form = CreateUser(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get("password1")
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request,
+                             'Compte créé avec succès pour ' + username)
+            return redirect(settings.LOGIN_REDIRECT_URL)
     return render(request, 'account/signup.html',
                   context={'form': form})
 

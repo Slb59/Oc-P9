@@ -4,7 +4,7 @@ from .models import Ticket
 from django.contrib.auth.decorators import login_required
 
 
-@login_required(login_url='account/login')
+@login_required
 def feed(request):
     """ display tickets and reviews """
     tickets = Ticket.objects.all()
