@@ -1,10 +1,18 @@
 from django.conf import settings
 from django.shortcuts import render, redirect
 from .forms import LoginUser, CreateUser
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from django.views.generic import View
+from django.views.generic import View, CreateView
+from django.urls import reverse_lazy
 # from . import forms
+
+
+# class SignupPage(CreateView):
+#     form_class = UserCreationForm
+#     success_url = reverse_lazy('account:login')
+#     template_name = 'account/signup.html'
 
 
 def signup(request):
@@ -21,6 +29,9 @@ def signup(request):
             messages.success(request,
                              'Compte créé avec succès pour ' + username)
             return redirect(settings.LOGIN_REDIRECT_URL)
+        else:
+            messages.info(request,
+                            "Les données saisies sont invalides")
     return render(request, 'account/signup.html',
                   context={'form': form})
 
@@ -51,7 +62,7 @@ class LoginPage(View):
             if user is not None:
                 login(request, user)
                 messages.info(request,
-                              "Bonjour, {user.username}! Vous êtes connecté")
+                              f"Bonjour, {user.username}! Vous êtes connecté")
                 return redirect(settings.LOGIN_REDIRECT_URL)
         else:
             messages.info(request,

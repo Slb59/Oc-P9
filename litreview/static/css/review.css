@@ -80,11 +80,14 @@ footer .footer__menu li a {
 
 header {
   background-color: rgba(246, 177, 73, 0.8);
-  padding: 1rem;
-  height: 30px;
+  padding: 0.2rem 3rem;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(1fr 2fr 4fr);
   margin: 10px auto;
+}
+header .user_connected {
+  grid-column: 2;
+  color: rgb(11, 31, 101);
 }
 header .header__menu {
   padding-top: 0em;
@@ -93,7 +96,6 @@ header .header__menu {
   margin: auto 1em;
   align-content: center;
   text-align: right;
-  transform: translateY(-120%);
 }
 header .header__menu ul {
   margin: 0;
