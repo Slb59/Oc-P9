@@ -25,10 +25,10 @@ def signup(request):
                   context={'form': form})
 
 
-def logout_user(request):
-    """logout the connected user and redirect to login page"""
-    logout(request)
-    return redirect(settings.LOGIN_URL)
+# def logout_user(request):
+#     """logout the connected user and redirect to login page"""
+#     logout(request)
+#     return redirect(settings.LOGIN_URL)
 
 
 class LoginPage(View):
