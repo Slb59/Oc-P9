@@ -124,4 +124,10 @@ header .header__menu li a {
   text-align: center;
 }
 
+.signup {
+  padding: 0 4rem;
+  text-align: center;
+  max-width: 20rem;
+}
+
 /*# sourceMappingURL=review.css.map */

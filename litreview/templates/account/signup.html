@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<div class = 'signup'>
     <div class = 'div_title'>Inscrivez-vous</div>
     
     <div class = 'div_form'>
@@ -13,13 +14,14 @@
                 <button class="btn" type="submit" >S'inscrire</button>                
             </div>
         </form>
-    </div>
-    <div>
-        {% for message in messages%}
-            <p id="messages">{{message}}</p>
-        {% endfor %}
-        {% if form.errors %}
-            {{ form.errors }}
-        {% endif %}
-    </div>
+    </div>   
+</div>  
+<div class ="signup__message">
+    {% for message in messages%}
+        <p id="messages">{{message}}</p>
+    {% endfor %}
+    {% if form.errors %}
+        {{ form.errors }}
+    {% endif %}
+</div>
 {% endblock %}
