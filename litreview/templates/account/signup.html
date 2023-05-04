@@ -8,7 +8,10 @@
             {{form.username}}
             {{form.password1}}
             {{form.password2}}
-            <div><button class="btn" type="submit" >S'inscrire</button></div>
+            <div>
+                <a href="{% url 'account:login' %}"><button class="btn" type="button">Retourner</button></a>
+                <button class="btn" type="submit" >S'inscrire</button>                
+            </div>
         </form>
     </div>
     <div>
