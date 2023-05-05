@@ -1,0 +1,19 @@
+.ticket_info {
+    border-left: 2px $color-border ridge;
+    
+    .ticket_info__1 {
+        // background: red;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        line-height: 0;    
+    }
+
+    .ticket_info__2 {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+
+        .ticket_info__2__text {
+            text-align: justify;
+        }
+    }
+}

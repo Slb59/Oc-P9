@@ -18,7 +18,7 @@ def feed(request):
 def ticket_detail(request, id):
     ticket = get_object_or_404(Ticket, id=id)
 
-    return render(request, 'review/ticket/detail.html', {'ticket': ticket})
+    return render(request, 'review/ticket/ticket_info.html', {'ticket': ticket})
 
 
 def ticket_list(request):
