@@ -149,7 +149,7 @@ header .header__menu li a {
 }
 .ticket_info .ticket_info__2 {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 4fr;
 }
 .ticket_info .ticket_info__2 .ticket_info__2__text {
   text-align: justify;
