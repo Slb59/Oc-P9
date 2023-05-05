@@ -130,4 +130,13 @@ header .header__menu li a {
   max-width: 20rem;
 }
 
+.add_ticket {
+  padding: 0 4rem;
+  text-align: center;
+  font-weight: bold;
+}
+.add_ticket .add_ticket_form {
+  text-align: left;
+}
+
 /*# sourceMappingURL=review.css.map */

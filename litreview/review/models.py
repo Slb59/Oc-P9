@@ -20,7 +20,8 @@ class Review(models.Model):
     rating = models.PositiveSmallIntegerField(
         # max_length=1024,
         # WARNINGS:
-        # review.Review.rating: (fields.W122) 'max_length' is ignored when used with PositiveSmallIntegerField.
+        # review.Review.rating: (fields.W122) 'max_length'
+        # is ignored when used with PositiveSmallIntegerField.
         #         HINT: Remove 'max_length' from field
         # validates that rating must be between 0 and 5
         validators=[MinValueValidator(0), MaxValueValidator(5)])
@@ -39,8 +40,9 @@ class UserFollows(models.Model):
                              on_delete=models.CASCADE,
                              related_name='following')
     followed_user = models.ForeignKey(to=settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE,
-                             related_name='followed_by')
+                                      on_delete=models.CASCADE,
+                                      related_name='followed_by')
+
     class Meta:
         # ensures we don't get multiple UserFollows instances
         # for unique user-user_followed pairs
@@ -48,4 +50,6 @@ class UserFollows(models.Model):
         verbose_name_plural = "users followed"
 
     def __str__(self) -> str:
-        return "followed user of " + str(self.user) + ": " + str(self.followed_user) 
+        return "followed user of " + str(self.user) + ": " \
+            + str(self.followed_user)
+
