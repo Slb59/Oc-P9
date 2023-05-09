@@ -2,10 +2,11 @@ from django.conf import settings
 from django.shortcuts import render, redirect
 from .forms import LoginUser, CreateUser
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from django.views.generic import View, CreateView
-from django.urls import reverse_lazy
+from django.views.generic import View
+# from django.views.generic import CreateView
+# from django.urls import reverse_lazy
 # from . import forms
 
 
@@ -31,7 +32,7 @@ def signup(request):
             return redirect(settings.LOGIN_REDIRECT_URL)
         else:
             messages.info(request,
-                            "Les données saisies sont invalides")
+                          "Les données saisies sont invalides")
     return render(request, 'account/signup.html',
                   context={'form': form})
 

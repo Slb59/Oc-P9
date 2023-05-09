@@ -11,7 +11,12 @@ from .forms import TicketForm
 @login_required
 def feed(request):
     """ display tickets and reviews """
-    tickets = Ticket.objects.all()
+    # reviews = Review.objects.all().order_by('-time_created')
+    # Entry.objects.order_by(Coalesce('summary', 'headline').desc())
+
+    # tri par date decroissante
+    tickets = Ticket.objects.all().order_by('-time_created')    
+
     return render(request, 'review/feed.html', {'tickets': tickets})
 
 
