@@ -1,14 +1,19 @@
 from django.conf import settings
 from django.shortcuts import render, redirect
-from .forms import LoginUser, CreateUser
+
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.views.generic import View
 # from django.views.generic import CreateView
 # from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import IntegrityError
+
+from .forms import LoginUser, CreateUser
 from .forms import SubscriptionForm
+from .models import UserFollows
 
 
 class SubscriptionView(LoginRequiredMixin, View):
@@ -21,20 +26,33 @@ class SubscriptionView(LoginRequiredMixin, View):
             request, self.template_name,
             context={'form': form})
 
+    def check_username(self, connected_user, username) -> str:
+        message = ''
+        try:
+            followed_user = User.objects.get(username=username)
+            if followed_user == connected_user:
+                message = 'Non, non : vous ne pouvez vous suivre !'
+            else:
+                try:
+                    user_follow = UserFollows.objects.create(
+                        user=connected_user, followed_user=followed_user)
+                    user_follow.save()
+                    message = 'Utilisateur '\
+                        + followed_user.username + ' ajouté'
+                except IntegrityError:
+                    message = 'Utilisateur ' + followed_user.username\
+                        + ' déjà suivi'
+        except Exception:
+            message = 'Utilisateur ' + username + ' inconnu'
+        return message
+
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
             # search the user object matching the user name entered
             form.save(commit=False)
             username = form.cleaned_data.get('username')
-            try:
-                raise Exception
-            except Exception:
-                messages.info(request, 'utilisateur ' + username + ' inconnu')
-                return render(
-                    request, self.template_name,
-                    context={'form': form})
-
+            messages.info(request, self.check_username(request.user, username))
             return render(
                 request, self.template_name,
                 context={'form': form})
