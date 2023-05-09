@@ -7,8 +7,22 @@ from django.contrib import messages
 from django.views.generic import View
 # from django.views.generic import CreateView
 # from django.urls import reverse_lazy
-# from . import forms
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import SubscriptionForm
 
+
+class SubscriptionView(LoginRequiredMixin, View):
+    form_class = SubscriptionForm
+    template_name = 'account/subscription.html'
+
+    def get(self, request):
+        form = self.form_class()
+        return render(
+            request, self.template_name,
+            context={'form': form})
+
+    def post(self, request):
+        ...
 
 # class SignupPage(CreateView):
 #     form_class = UserCreationForm

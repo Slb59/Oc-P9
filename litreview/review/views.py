@@ -15,7 +15,7 @@ def feed(request):
     # Entry.objects.order_by(Coalesce('summary', 'headline').desc())
 
     # tri par date decroissante
-    tickets = Ticket.objects.all().order_by('-time_created')    
+    tickets = Ticket.objects.all().order_by('-time_created')
 
     return render(request, 'review/feed.html', {'tickets': tickets})
 

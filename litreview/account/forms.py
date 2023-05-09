@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
+from django.forms import ModelForm 
+from .models import UserFollows
 
 
 class LoginUser(AuthenticationForm):
@@ -30,3 +32,15 @@ class CreateUser(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'password1', 'password2']
+
+
+class SubscriptionForm(ModelForm):
+
+    username = forms.CharField(
+        widget=forms.widgets.TextInput(
+            attrs={'placeholder': "Nom d'utilisateur"}))
+
+    class Meta:
+        model = UserFollows
+        fields = ['username']
+
