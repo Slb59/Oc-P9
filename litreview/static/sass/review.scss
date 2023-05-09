@@ -1,8 +1,12 @@
 @import "utils/variables";
+
 @import "layouts/base";
 @import "layouts/footer";
 @import "layouts/header";
-@import "pages/login";
-@import "pages/signup";
-@import "pages/addticket";
-@import "pages/ticketinfo";
+
+@import "pages/account/login";
+@import "pages/account/signup";
+@import "pages/account/subscription";
+
+@import "pages/review/addticket";
+@import "pages/review/ticketinfo";

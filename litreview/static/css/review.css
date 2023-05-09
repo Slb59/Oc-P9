@@ -130,6 +130,15 @@ header .header__menu li a {
   max-width: 20rem;
 }
 
+.subscription form {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
 .add_ticket {
   padding: 0 4rem;
   text-align: center;

@@ -1,4 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-<div class = 'div_title'>Suivre d'autres utilisateurs</div>
+<div class = 'subscription'>
+    <div class = 'div_title'>Suivre d'autres utilisateurs</div>
+    <div class = 'div_form'>
+        <form method="post">            
+            {% csrf_token %}
+            <div>{{form.username}}</div>
+            <div>
+                <button class="btn" type="submit" >Envoyer</button>     
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
