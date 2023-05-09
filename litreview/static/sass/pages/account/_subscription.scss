@@ -20,4 +20,14 @@
         // vertical-align: middle;
         padding:0;
     }
+
+    .div_form {
+        // background: red;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 1rem 0 0 0;
+    }
 }

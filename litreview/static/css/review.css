@@ -138,6 +138,14 @@ header .header__menu li a {
   align-items: center;
   padding: 0;
 }
+.subscription .div_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 1rem 0 0 0;
+}
 
 .add_ticket {
   padding: 0 4rem;

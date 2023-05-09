@@ -22,7 +22,22 @@ class SubscriptionView(LoginRequiredMixin, View):
             context={'form': form})
 
     def post(self, request):
-        ...
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            # search the user object matching the user name entered
+            form.save(commit=False)
+            username = form.cleaned_data.get('username')
+            try:
+                raise Exception
+            except Exception:
+                messages.info(request, 'utilisateur ' + username + ' inconnu')
+                return render(
+                    request, self.template_name,
+                    context={'form': form})
+
+            return render(
+                request, self.template_name,
+                context={'form': form})
 
 # class SignupPage(CreateView):
 #     form_class = UserCreationForm

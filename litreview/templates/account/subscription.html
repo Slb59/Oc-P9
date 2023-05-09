@@ -8,8 +8,18 @@
             <div>{{form.username}}</div>
             <div>
                 <button class="btn" type="submit" >Envoyer</button>     
-            </div>
+            </div>            
         </form>
+        <div class ="subscription__message">
+            {% for message in messages%}
+                <p id="messages">{{message}}</p>
+            {% endfor %}
+            {% if form.errors %}
+                {{ form.errors }}
+            {% endif %}
+        </div>
     </div>
+    
 </div>
+
 {% endblock %}
