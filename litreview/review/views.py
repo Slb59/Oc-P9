@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.generic import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Ticket
 from .forms import TicketForm
@@ -40,7 +41,7 @@ def ticket_list_user(request, id):
                    'user': user})
 
 
-class TicketView(View):
+class TicketView(LoginRequiredMixin, View):
     """ add a new ticket """
     form_class = TicketForm
     template_name = 'review/ticket/add_ticket.html'
