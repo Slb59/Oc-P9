@@ -21,7 +21,9 @@
          <div class="ticket_info__2__text">
             {{ ticket.description|linebreaks }}
             <div>
-               <!-- TODO: ajouter les boutons creer une critique, modifier,supprimer, sous condition -->
+               <!-- draw the button "creer une critique" if ticket is without review  -->
+               <a href=""><button class="btn">Creer une critique</button></a>
+               <!-- TODO: ajouter les boutons modifier,supprimer, sous condition --> 
             </div>
          </div>
       </div>

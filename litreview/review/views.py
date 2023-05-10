@@ -41,6 +41,11 @@ def ticket_list_user(request, id):
                    'user': user})
 
 
+class ReviewView(LoginRequiredMixin, View):
+    """ add a new review on ticket """
+    ...
+
+
 class TicketView(LoginRequiredMixin, View):
     """ add a new ticket """
     form_class = TicketForm
