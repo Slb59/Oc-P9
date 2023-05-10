@@ -153,6 +153,11 @@ header .header__menu li a {
   padding: 0;
 }
 
+.feed__buttons {
+  display: flex;
+  justify-content: center;
+}
+
 .add_ticket {
   padding: 0 4rem;
   text-align: center;
