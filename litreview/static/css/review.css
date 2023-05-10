@@ -146,6 +146,11 @@ header .header__menu li a {
   margin: 0;
   padding: 1rem 0 0 0;
 }
+.subscription .subscription__lists {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 
 .add_ticket {
   padding: 0 4rem;

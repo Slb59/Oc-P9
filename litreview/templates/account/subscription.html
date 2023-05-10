@@ -19,7 +19,32 @@
             {% endif %}
         </div>
     </div>
-    
+    <div class="subscription__lists">
+        <div class="subscription__lists__subscriptions">
+            <div class = 'div_title'>Abonnements</div>
+            <table>
+                <!-- for each followed user -->
+                <tr>
+                    <td>username</td>
+                    <td><a href=""><button class="btn" type="button">
+                        Désabonner</button></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="subscription__lists__subscribers">
+            <div class = 'div_title'>Abonnés</div>
+            <table>
+                <!-- for each subscribers user -->
+                <tr>
+                    <td>username</td>
+                    <td><a href=""><button class="btn" type="button">
+                        Désabonner</button></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

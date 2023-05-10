@@ -20,18 +20,26 @@ class SubscriptionView(LoginRequiredMixin, View):
     form_class = SubscriptionForm
     template_name = 'account/subscription.html'
 
+    def define_context(self, connected_user) -> dict:
+        followed_users = UserFollows.objects.filter(user=connected_user)
+        subscriber_users = UserFollows.objects.filter(
+            followed_user=connected_user)
+        return {'followed_users': followed_users,
+                'subscriber_users': subscriber_users}
+
     def get(self, request):
         form = self.form_class()
+        context = self.define_context(request.user) | {'form': form}
         return render(
             request, self.template_name,
-            context={'form': form})
+            context=context)
 
     def check_username(self, connected_user, username) -> str:
         message = ''
         try:
             followed_user = User.objects.get(username=username)
             if followed_user == connected_user:
-                message = 'Non, non : vous ne pouvez vous suivre !'
+                message = 'Allons, allons : vous ne pouvez vous suivre !'
             else:
                 try:
                     user_follow = UserFollows.objects.create(
@@ -40,10 +48,10 @@ class SubscriptionView(LoginRequiredMixin, View):
                     message = 'Utilisateur '\
                         + followed_user.username + ' ajouté'
                 except IntegrityError:
-                    message = 'Utilisateur ' + followed_user.username\
+                    message = 'Non, non: ' + followed_user.username\
                         + ' déjà suivi'
         except Exception:
-            message = 'Utilisateur ' + username + ' inconnu'
+            message = username + ' ? Je ne connais pas ??'
         return message
 
     def post(self, request):
