@@ -24,24 +24,28 @@
             <div class = 'div_title'>Abonnements</div>
             <table>
                 <!-- for each followed user -->
+                {% for followed_user in followed_users %}
                 <tr>
-                    <td>username</td>
-                    <td><a href=""><button class="btn" type="button">
+                    <td>{{followed_user.followed_user}}</td>
+                    <td><a href="{% url 'account:unsubscription' followed_user.id %}"><button class="btn" type="button">
                         Désabonner</button></a>
                     </td>
                 </tr>
+                {% endfor %}
             </table>
         </div>
         <div class="subscription__lists__subscribers">
             <div class = 'div_title'>Abonnés</div>
             <table>
                 <!-- for each subscribers user -->
+                {% for subscriber_user in subscriber_users %}
                 <tr>
-                    <td>username</td>
-                    <td><a href=""><button class="btn" type="button">
+                    <td>{{subscriber_user.user}}</td>
+                    <td><a href="{% url 'account:unsubscription' subscriber_user.id %}"><button class="btn" type="button">
                         Désabonner</button></a>
                     </td>
                 </tr>
+                {% endfor %}
             </table>
         </div>
     </div>

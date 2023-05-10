@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -16,11 +16,32 @@ from .forms import SubscriptionForm
 from .models import UserFollows
 
 
+def unsubscribe(request, id):
+    """ remove the id user from the followed user """
+    user = get_object_or_404(UserFollows, id=id)
+    user.delete()
+    return redirect('account:subscription')
+
+
 class SubscriptionView(LoginRequiredMixin, View):
+    """ 
+        -> ask for a new subscription
+        -> list followed users whith unscubscribe button
+        -> list subscriber users whith unsubscribe button
+    """
     form_class = SubscriptionForm
     template_name = 'account/subscription.html'
 
     def define_context(self, connected_user) -> dict:
+        """ create a dict with the followed users 
+        and subscriber users of the connected_user
+
+        Args:
+            connected_user (_type_): _description_
+
+        Returns:
+            dict: _description_
+        """
         followed_users = UserFollows.objects.filter(user=connected_user)
         subscriber_users = UserFollows.objects.filter(
             followed_user=connected_user)
@@ -28,6 +49,7 @@ class SubscriptionView(LoginRequiredMixin, View):
                 'subscriber_users': subscriber_users}
 
     def get(self, request):
+        """ the get function for the request """
         form = self.form_class()
         context = self.define_context(request.user) | {'form': form}
         return render(
@@ -35,6 +57,12 @@ class SubscriptionView(LoginRequiredMixin, View):
             context=context)
 
     def check_username(self, connected_user, username) -> str:
+        """ check 
+            -> if the connected user is not the user choice
+            -> that the user choice exists
+            -> that the user choice is not already in the followed list
+        return the message corresponding to the cas encountered
+        """
         message = ''
         try:
             followed_user = User.objects.get(username=username)
@@ -49,21 +77,23 @@ class SubscriptionView(LoginRequiredMixin, View):
                         + followed_user.username + ' ajouté'
                 except IntegrityError:
                     message = 'Non, non: ' + followed_user.username\
-                        + ' déjà suivi'
+                        + ' déjà suivi !'
         except Exception:
             message = username + ' ? Je ne connais pas ??'
         return message
 
     def post(self, request):
+        """ the post function for the request """
         form = self.form_class(request.POST)
         if form.is_valid():
             # search the user object matching the user name entered
             form.save(commit=False)
             username = form.cleaned_data.get('username')
             messages.info(request, self.check_username(request.user, username))
+            context = self.define_context(request.user) | {'form': form}
             return render(
                 request, self.template_name,
-                context={'form': form})
+                context=context)
 
 # class SignupPage(CreateView):
 #     form_class = UserCreationForm
@@ -99,6 +129,7 @@ def signup(request):
 
 
 class LoginPage(View):
+    """ manage the login page get and post """
     form_class = LoginUser
     template_name = 'account/login.html'
 
