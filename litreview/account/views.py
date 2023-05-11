@@ -24,7 +24,7 @@ def unsubscribe(request, id):
 
 
 class SubscriptionView(LoginRequiredMixin, View):
-    """ 
+    """
         -> ask for a new subscription
         -> list followed users whith unscubscribe button
         -> list subscriber users whith unsubscribe button
@@ -35,12 +35,6 @@ class SubscriptionView(LoginRequiredMixin, View):
     def define_context(self, connected_user) -> dict:
         """ create a dict with the followed users 
         and subscriber users of the connected_user
-
-        Args:
-            connected_user (_type_): _description_
-
-        Returns:
-            dict: _description_
         """
         followed_users = UserFollows.objects.filter(user=connected_user)
         subscriber_users = UserFollows.objects.filter(
@@ -50,46 +44,54 @@ class SubscriptionView(LoginRequiredMixin, View):
 
     def get(self, request):
         """ the get function for the request """
-        form = self.form_class()
+        form = self.form_class(request.user)
         context = self.define_context(request.user) | {'form': form}
         return render(
             request, self.template_name,
             context=context)
 
-    def check_username(self, connected_user, username) -> str:
-        """ check 
-            -> if the connected user is not the user choice
-            -> that the user choice exists
-            -> that the user choice is not already in the followed list
-        return the message corresponding to the cas encountered
-        """
-        message = ''
-        try:
-            followed_user = User.objects.get(username=username)
-            if followed_user == connected_user:
-                message = 'Allons, allons : vous ne pouvez vous suivre !'
-            else:
-                try:
-                    user_follow = UserFollows.objects.create(
-                        user=connected_user, followed_user=followed_user)
-                    user_follow.save()
-                    message = 'Utilisateur '\
-                        + followed_user.username + ' ajouté'
-                except IntegrityError:
-                    message = 'Non, non: ' + followed_user.username\
-                        + ' déjà suivi !'
-        except Exception:
-            message = username + ' ? Je ne connais pas ??'
-        return message
+    # def check_username(self, connected_user, username) -> str:
+    #     """ check 
+    #         -> if the connected user is not the user choice
+    #         -> that the user choice exists
+    #         -> that the user choice is not already in the followed list
+    #     return the message corresponding to the cas encountered
+    #     """
+    #     message = ''
+    #     try:
+    #         followed_user = User.objects.get(username=username)
+    #         if followed_user == connected_user:
+    #             message = 'Allons, allons : vous ne pouvez vous suivre !'
+    #         else:
+    #             try:
+    #                 user_follow = UserFollows.objects.create(
+    #                     user=connected_user, followed_user=followed_user)
+    #                 user_follow.save()
+    #                 message = 'Utilisateur '\
+    #                     + followed_user.username + ' ajouté'
+    #             except IntegrityError:
+    #                 message = 'Non, non: ' + followed_user.username\
+    #                     + ' déjà suivi !'
+    #     except Exception:
+    #         message = username + ' ? Je ne connais pas ??'
+    #     return message
 
     def post(self, request):
         """ the post function for the request """
-        form = self.form_class(request.POST)
+        form = self.form_class(request.user, request.POST)
         if form.is_valid():
             # search the user object matching the user name entered
-            form.save(commit=False)
-            username = form.cleaned_data.get('username')
-            messages.info(request, self.check_username(request.user, username))
+            # form.save(commit=False)
+            # user = form.cleaned_data.get('username')
+            # messages.info(request, self.check_username(request.user, username))
+            messages.info(request,
+                          'Utilisateur ' + form.cleaned_data.get('username').username + ' ajouté')
+            context = self.define_context(request.user) | {'form': form}
+            return render(
+                request, self.template_name,
+                context=context)
+        else:
+            # messages.info(request,
             context = self.define_context(request.user) | {'form': form}
             return render(
                 request, self.template_name,
