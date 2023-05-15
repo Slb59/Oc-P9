@@ -8,7 +8,7 @@ from django.db.models import Q
 
 from .models import Ticket, Review
 from account.models import UserFollows
-from .forms import TicketForm
+from .forms import TicketForm, ReviewForm
 
 
 @login_required
@@ -18,21 +18,33 @@ def feed(request):
     # Entry.objects.order_by(Coalesce('summary', 'headline').desc())
 
     # users that the connected user follow
-    user_follows = UserFollows.objects.filter(user=request.user)
-    users_filter = []
-    users_filter.append(request.user)
+    # user_follows = UserFollows.objects.filter(user=request.user)
+    # users_filter = []
+    # users_filter.append(request.user)
 
     # tickets order by time_created desc
     # tickets of connected user and users follows
-    # tickets = Ticket.objects.all().order_by('-time_created')
+    tickets = Ticket.objects.all().order_by('-time_created')
     # user_follows.followed_user
-    tickets = Ticket.objects.filter(user__in=users_filter)
+    # exemple du cours avec Q :
+    # blogs = models.Blog.objects.filter(
+    #     Q(author__in=request.user.follows) | Q(starred=True))
+    # tickets = Ticket.objects.filter(user__in=users_filter)
 
     # reviews of conneted user and users follows
     # reviews = Review.objects.all()
 
     # combine tickets and reviews
-
+    # exemple du cours : 
+    # blogs_and_photos = sorted(
+    #     chain(blogs, photos),
+    #     key=lambda instance: instance.date_created,
+    #     reverse=True
+    # )
+    # context = {
+    #     'blogs_and_photos': blogs_and_photos,
+    # }
+    # tickets_and_review = chain(reviews, tickets)
     # order by the posts by time_created desc
 
     return render(request, 'review/feed.html', {'tickets': tickets})
@@ -59,6 +71,27 @@ def ticket_list_user(request, id):
 
 
 class ReviewView(LoginRequiredMixin, View):
+    """ add a new review on ticket """
+    ticket_form_class = TicketForm
+    review_form_class = ReviewForm
+    template_name = 'review/review/add_review.html'
+
+    def get(self, request):
+        ticket_form = self.ticket_form_class()
+        review_form = self.review_form_class()
+        context = {
+            'ticket_form': ticket_form,
+            'review_form': review_form,
+        }
+        return render(request,
+                      self.template_name,
+                      context=context)
+
+    def post(self, request):
+        ...
+
+
+class ReviewOnTicketView(LoginRequiredMixin, View):
     """ add a new review on ticket """
     ...
 
