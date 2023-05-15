@@ -48,4 +48,4 @@ class ReviewForm(ModelForm):
     
     class Meta:
         model = Review
-        fields = ['headline', 'body']
+        fields = ['headline', 'rating', 'body']

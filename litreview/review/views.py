@@ -88,7 +88,18 @@ class ReviewView(LoginRequiredMixin, View):
                       context=context)
 
     def post(self, request):
-        ...
+        ticket_form = self.ticket_form_class(request.POST, request.FILES)
+        review_form = self.review_form_class(request.POST)
+        if ticket_form.is_valid():
+            if review_form.is_valid():
+                form_ticket = ticket_form.save(commit=False)
+                form_ticket.user = request.user
+                form_ticket.save()
+                form = review_form.save(commit=False)
+                form.ticket = form_ticket
+                form.user = request.user
+                form.save()
+                return redirect(settings.LOGIN_REDIRECT_URL)
 
 
 class ReviewOnTicketView(LoginRequiredMixin, View):
@@ -105,7 +116,7 @@ class TicketView(LoginRequiredMixin, View):
         form = self.form_class()
         return render(
             request, self.template_name,
-            context={'form': form})
+            context={'ticket_form': form})
 
     def post(self, request):
         form = self.form_class(request.POST, request.FILES)

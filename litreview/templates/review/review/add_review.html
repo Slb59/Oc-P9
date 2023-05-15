@@ -5,14 +5,7 @@
     <form method="POST", enctype="multipart/form-data">
         {% csrf_token %}
         <div>
-            <div class = 'add_ticket_form'>
-                <p>Titre</p>
-                {{ticket_form.title}}
-                <p>Description</p>
-                {{ticket_form.description}}
-                <p>Image</p>
-                {{ticket_form.image}}           
-            </div>
+            {% include 'review/ticket/add_ticket_form.html' %}
             <hr class="hr">
         </div>
         
