@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+
     <div class = 'div_title'>Créer une critique</div>
     <form method="POST", enctype="multipart/form-data">
         {% csrf_token %}
@@ -12,10 +13,11 @@
                 <p>Image</p>
                 {{ticket_form.image}}           
             </div>
+            <hr class="hr">
         </div>
-        <hr style="margin-left: 10px; border-top: 5px solid red; ">
+        
         <div>
-
+            
         </div>
     </form>
 {% endblock %}
