@@ -3,13 +3,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.views.generic import View
 # from django.views.generic import CreateView
 # from django.urls import reverse_lazy
-from django.db import IntegrityError
+# from django.db import IntegrityError
 
 from .forms import LoginUser, CreateUser
 from .forms import SubscriptionForm
@@ -83,19 +83,24 @@ class SubscriptionView(LoginRequiredMixin, View):
             # search the user object matching the user name entered
             # form.save(commit=False)
             # user = form.cleaned_data.get('username')
-            # messages.info(request, self.check_username(request.user, username))
-            messages.info(request,
-                          'Utilisateur ' + form.cleaned_data.get('username').username + ' ajouté')
-            context = self.define_context(request.user) | {'form': form}
-            return render(
-                request, self.template_name,
-                context=context)
-        else:
+            # messages.info(request, self.check_username(request.user,
+            # username))
             # messages.info(request,
-            context = self.define_context(request.user) | {'form': form}
-            return render(
-                request, self.template_name,
-                context=context)
+            #               'Utilisateur ' + form.cleaned_data.get('username')
+            # + ' ajouté')
+            messages.info(request,
+                          'Utilisateur '
+                          + request.POST.get('username') + ' ajouté')
+            # context = self.define_context(request.user) | {'form': form}
+            # return render(
+            #     request, self.template_name,
+            #     context=context)
+        # else:
+            # messages.info(request, 
+        context = self.define_context(request.user) | {'form': form}
+        return render(
+            request, self.template_name,
+            context=context)
 
 # class SignupPage(CreateView):
 #     form_class = UserCreationForm

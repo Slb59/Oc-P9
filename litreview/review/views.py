@@ -4,8 +4,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 
-from .models import Ticket
+from .models import Ticket, Review
+from account.models import UserFollows
 from .forms import TicketForm
 
 
@@ -15,8 +17,23 @@ def feed(request):
     # reviews = Review.objects.all().order_by('-time_created')
     # Entry.objects.order_by(Coalesce('summary', 'headline').desc())
 
-    # tri par date decroissante
-    tickets = Ticket.objects.all().order_by('-time_created')
+    # users that the connected user follow
+    user_follows = UserFollows.objects.filter(user=request.user)
+    users_filter = []
+    users_filter.append(request.user)
+
+    # tickets order by time_created desc
+    # tickets of connected user and users follows
+    # tickets = Ticket.objects.all().order_by('-time_created')
+    # user_follows.followed_user
+    tickets = Ticket.objects.filter(user__in=users_filter)
+
+    # reviews of conneted user and users follows
+    # reviews = Review.objects.all()
+
+    # combine tickets and reviews
+
+    # order by the posts by time_created desc
 
     return render(request, 'review/feed.html', {'tickets': tickets})
 

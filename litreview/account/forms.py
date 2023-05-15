@@ -38,9 +38,9 @@ class CreateUser(UserCreationForm):
 
 class SubscriptionForm(ModelForm):
 
-    # username = forms.CharField(
-    #     widget=forms.widgets.TextInput(
-    #         attrs={'placeholder': "Nom d'utilisateur"}))
+    username = forms.CharField(
+        widget=forms.widgets.TextInput(
+            attrs={'placeholder': "Nom d'utilisateur"}))
     
     # username = forms.CharField(
     #     widget=forms.ModelChoiceField(
@@ -52,13 +52,13 @@ class SubscriptionForm(ModelForm):
     #     super(UserFollows, self).__init__(*args, **kwargs)
     #     self.fields['username'] = forms.ModelChoiceField(queryset=User.objects.all())
 
-    username = forms.ModelChoiceField(
-            queryset=User.objects.all())
+    # username = forms.ModelChoiceField(
+    #         queryset=User.objects.all())
     
     def __init__(self, user, *args, **kwargs):
         """ set the connected user """
         self.user = user
-        followed_users = UserFollows.objects.filter(user=self.user)
+        # followed_users = UserFollows.objects.filter(user=self.user)
         super().__init__(*args, **kwargs)
 
     def clean_username(self):
@@ -71,9 +71,8 @@ class SubscriptionForm(ModelForm):
 
         try:
             followed_user = User.objects.get(username=user)
-            print(self.user)
             if followed_user == self.user:
-                message = 'Allons, allons : vous ne pouvez vous suivre !'
+                message = 'Vous ne pouvez pas vous suivre !'
                 raise ValidationError(message)
             else:
                 try:
@@ -81,11 +80,11 @@ class SubscriptionForm(ModelForm):
                         user=self.user, followed_user=followed_user)
                     user_follow.save()
                 except IntegrityError:
-                    message = 'Non, non: ' + followed_user.username\
+                    message = 'Désolé: ' + followed_user.username\
                         + ' déjà suivi !'
                     raise ValidationError(message)
         except User.DoesNotExist:
-            message = user.username + ' ? Je ne connais pas ??'
+            message = user + " n'est pas défini !"
             raise ValidationError(message)
         # except Exception:
             # message = user.username + ' ? Je ne connais pas ??'
