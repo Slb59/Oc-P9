@@ -31,8 +31,13 @@ def feed(request):
     #     Q(author__in=request.user.follows) | Q(starred=True))
     # tickets = Ticket.objects.filter(user__in=users_filter)
 
+    # comment distinguer les tickets avec une critique des tickets sans critique ??
+
     # reviews of conneted user and users follows
-    # reviews = Review.objects.all()
+    reviews = Review.objects.all()
+    tickets_with_review = []
+    for review in reviews:
+        tickets_with_review.append(review.ticket)
 
     # combine tickets and reviews
     # exemple du cours : 
@@ -54,7 +59,8 @@ def ticket_detail(request, id):
     ticket = get_object_or_404(Ticket, id=id)
 
     return render(request, 'review/ticket/ticket_info.html',
-                  {'ticket': ticket})
+                  {'ticket': ticket
+                   })
 
 
 def ticket_list(request):

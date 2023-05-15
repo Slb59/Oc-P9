@@ -22,7 +22,9 @@
             {{ ticket.description|linebreaks }}
             <div>
                <!-- draw the button "creer une critique" if ticket is without review  -->
-               <a href=""><button class="btn">Creer une critique</button></a>
+               {% if not ticket.has_review %}
+                  <a href=""><button class="btn">Creer une critique</button></a>
+               {% endif %}
                <!-- TODO: ajouter les boutons modifier,supprimer, sous condition --> 
             </div>
          </div>
