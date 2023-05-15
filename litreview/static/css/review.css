@@ -42,11 +42,6 @@ form {
   padding: 1rem;
 }
 
-hr {
-  margin-left: 10px;
-  border-top: 5px solid rgb(11, 31, 101);
-}
-
 footer {
   background-color: rgba(246, 177, 73, 0.8);
   padding: 1rem;
@@ -163,6 +158,12 @@ header .header__menu li a {
   justify-content: center;
 }
 
+hr {
+  margin-left: 50px;
+  margin-right: 50px;
+  border-top: 5px solid rgb(11, 31, 101);
+}
+
 .add_ticket {
   padding: 0 4rem;
   text-align: center;
@@ -170,6 +171,27 @@ header .header__menu li a {
 }
 .add_ticket .add_ticket_form {
   text-align: left;
+}
+
+.hr_black {
+  margin-left: 0px;
+  border-top: 2px solid;
+}
+
+form {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0;
+}
+
+.rate {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  margin-right: 3rem;
 }
 
 .ticket_info {
