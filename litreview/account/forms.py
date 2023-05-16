@@ -41,7 +41,7 @@ class SubscriptionForm(ModelForm):
     username = forms.CharField(
         widget=forms.widgets.TextInput(
             attrs={'placeholder': "Nom d'utilisateur"}))
-    
+
     # username = forms.CharField(
     #     widget=forms.ModelChoiceField(
     #         queryset=User.objects.all(),
@@ -50,11 +50,12 @@ class SubscriptionForm(ModelForm):
 
     # def __init__(self, *args, **kwargs):
     #     super(UserFollows, self).__init__(*args, **kwargs)
-    #     self.fields['username'] = forms.ModelChoiceField(queryset=User.objects.all())
+    #     self.fields['username'] = 
+    # forms.ModelChoiceField(queryset=User.objects.all())
 
     # username = forms.ModelChoiceField(
     #         queryset=User.objects.all())
-    
+
     def __init__(self, user, *args, **kwargs):
         """ set the connected user """
         self.user = user
@@ -90,7 +91,7 @@ class SubscriptionForm(ModelForm):
             # message = user.username + ' ? Je ne connais pas ??'
             # raise ValidationError(message)
         # return message
-    
+
         return user
 
     class Meta:
