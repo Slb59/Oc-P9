@@ -1,0 +1,28 @@
+<div class="cadre_info">
+    <!-- <hr class="hr"> -->
+    <div class="review_info__1">
+        {% if instance.user == request.user %}
+            <p>Vous avez publié une critique</p>
+        {% else %}
+            <p>{{instance.user|title}} a publié une critique</p>
+        {% endif %}
+        <p class="review_info__date">
+            {{ instance.time_created | time}}, {{ instance.time_created | date}}
+        </p>
+    </div>
+    <div>
+        {{instance.headline}} &nbsp;- &nbsp;
+        <!-- display stars -->
+        {% with ''|center:instance.rating as range %}
+        {% for _ in range %}
+            &#9733;
+        {% endfor %}
+        {% endwith %}
+    </div>
+    <div>
+        {{instance.body}}
+    </div>
+    {% include 'review/ticket/ticket_info.html' with instance=instance.ticket %}
+
+    <!-- display delete and update buttons -->
+</div>

@@ -20,8 +20,7 @@
         <!-- si c'est un ticket : ticket_info.html -->
             {% include 'review/ticket/ticket_info.html'%}
         {% elif instance|model_type == 'Review' %}
-            <p>!!!Il y a une critique qui doit être affichée ici!!!</p>
-            <!-- si c'est une critique : review_info.html -->
+            {% include 'review/review/review_info.html'%}
         {% endif %}
     {% endfor %}
 </div>

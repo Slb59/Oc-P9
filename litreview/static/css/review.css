@@ -194,19 +194,20 @@ form {
   margin-right: 3rem;
 }
 
-.ticket_info {
-  border-left: 2px rgb(11, 31, 101) ridge;
+.cadre_info {
+  border: 1mm rgb(11, 31, 101) ridge;
+  margin: 0.2rem;
 }
-.ticket_info .ticket_info__1 {
+.cadre_info .ticket_info__1 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   line-height: 0;
 }
-.ticket_info .ticket_info__2 {
+.cadre_info .ticket_info__2 {
   display: grid;
   grid-template-columns: 1fr 4fr;
 }
-.ticket_info .ticket_info__2 .ticket_info__2__text {
+.cadre_info .ticket_info__2 .ticket_info__2__text {
   text-align: justify;
 }
 
