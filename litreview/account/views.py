@@ -33,7 +33,7 @@ class SubscriptionView(LoginRequiredMixin, View):
     template_name = 'account/subscription.html'
 
     def define_context(self, connected_user) -> dict:
-        """ create a dict with the followed users 
+        """ create a dict with the followed users
         and subscriber users of the connected_user
         """
         followed_users = UserFollows.objects.filter(user=connected_user)
@@ -51,7 +51,7 @@ class SubscriptionView(LoginRequiredMixin, View):
             context=context)
 
     # def check_username(self, connected_user, username) -> str:
-    #     """ check 
+    #     """ check
     #         -> if the connected user is not the user choice
     #         -> that the user choice exists
     #         -> that the user choice is not already in the followed list
@@ -96,7 +96,7 @@ class SubscriptionView(LoginRequiredMixin, View):
             #     request, self.template_name,
             #     context=context)
         # else:
-            # messages.info(request, 
+            # messages.info(request,
         context = self.define_context(request.user) | {'form': form}
         return render(
             request, self.template_name,

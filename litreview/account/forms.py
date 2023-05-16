@@ -50,7 +50,7 @@ class SubscriptionForm(ModelForm):
 
     # def __init__(self, *args, **kwargs):
     #     super(UserFollows, self).__init__(*args, **kwargs)
-    #     self.fields['username'] = 
+    #     self.fields['username'] =
     # forms.ModelChoiceField(queryset=User.objects.all())
 
     # username = forms.ModelChoiceField(
