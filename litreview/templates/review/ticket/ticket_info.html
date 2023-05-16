@@ -2,27 +2,27 @@
    <div class="ticket_info">
       <hr class="hr">
       <div class="ticket_info__1">
-         {% if ticket.user == request.user %}
+         {% if instance.user == request.user %}
             <p>Vous avez demandé une critique</p>
          {% else %}
-            <p>{{ticket.user|title}} a demandé une critique</p>
+            <p>{{instance.user|title}} a demandé une critique</p>
          {% endif %}
          <p class="ticket_info__date">
-            {{ ticket.time_created | time}}, {{ ticket.time_created | date}}
+            {{ instance.time_created | time}}, {{ instance.time_created | date}}
          </p>
       </div>
       <div>
-         <p>{{ ticket.title }}</p>
+         <p>{{ instance.title }}</p>
       </div>
       <div class="ticket_info__2">   
          <div>
-            <img src="{{ticket.image.url }}">
+            <img src="{{instance.image.url }}">
          </div>
          <div class="ticket_info__2__text">
-            {{ ticket.description|linebreaks }}
+            {{ instance.description|linebreaks }}
             <div>
                <!-- draw the button "creer une critique" if ticket is without review  -->
-               {% if not ticket.has_review %}
+               {% if not instance.has_review %}
                   <a href=""><button class="btn">Creer une critique</button></a>
                {% endif %}
                <!-- TODO: ajouter les boutons modifier,supprimer, sous condition --> 

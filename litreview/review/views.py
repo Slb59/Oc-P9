@@ -1,3 +1,4 @@
+from itertools import chain
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
@@ -39,6 +40,10 @@ def feed(request):
     for review in reviews:
         tickets_with_review.append(review.ticket)
 
+    tickets_and_reviews = sorted(chain(tickets, reviews),
+                                 key=lambda instance: instance.time_created,
+                                 reverse=True)
+
     # combine tickets and reviews
     # exemple du cours : 
     # blogs_and_photos = sorted(
@@ -52,7 +57,9 @@ def feed(request):
     # tickets_and_review = chain(reviews, tickets)
     # order by the posts by time_created desc
 
-    return render(request, 'review/feed.html', {'tickets': tickets})
+    context = {'tickets_and_reviews': tickets_and_reviews}
+
+    return render(request, 'review/feed.html', context=context)
 
 
 def ticket_detail(request, id):

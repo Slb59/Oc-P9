@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load review_tags %}
 {% block content %}
 <div>
     {% for message in messages%}
@@ -13,11 +14,15 @@
 </div>
 
 <div class="feed__messages">
-    {% for ticket in tickets %}
+    {% for instance in tickets_and_reviews %}
     <!-- pour chaque post -->
+        {% if instance|model_type == 'Ticket' %}
         <!-- si c'est un ticket : ticket_info.html -->
-        {% include 'review/ticket/ticket_info.html'%}
-        <!-- si c'est une critique : review_info.html -->
+            {% include 'review/ticket/ticket_info.html'%}
+        {% elif instance|model_type == 'Review' %}
+            <p>!!!Il y a une critique qui doit être affichée ici!!!</p>
+            <!-- si c'est une critique : review_info.html -->
+        {% endif %}
     {% endfor %}
 </div>
 
