@@ -1,4 +1,4 @@
-
+{% load review_tags %}
    <div class="cadre_info">
       <!-- <hr class="hr"> -->
       <div class="ticket_info__1">
@@ -22,7 +22,7 @@
             {{ instance.description|linebreaks }}
             <div>
                <!-- draw the button "creer une critique" if ticket is without review  -->
-               {% if not instance.has_review %}
+               {% if not instance|has_review %}
                   <a href=""><button class="btn">Creer une critique</button></a>
                {% endif %}
                <!-- TODO: ajouter les boutons modifier,supprimer, sous condition --> 

@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Q
+from django.db.models import Q, Value, BooleanField
 
 from .models import Ticket, Review
 from account.models import UserFollows
@@ -15,34 +15,54 @@ from .forms import TicketForm, ReviewForm
 @login_required
 def feed(request):
     """ display tickets and reviews """
-    # reviews = Review.objects.all().order_by('-time_created')
-    # Entry.objects.order_by(Coalesce('summary', 'headline').desc())
 
     # users that the connected user follow
-    # user_follows = UserFollows.objects.filter(user=request.user)
-    # users_filter = []
-    # users_filter.append(request.user)
+    user_follows = UserFollows.objects.filter(
+        user=request.user).values_list('followed_user', flat=True)
 
-    # tickets order by time_created desc
-    # tickets of connected user and users follows
-    tickets = Ticket.objects.all().order_by('-time_created')
-    # user_follows.followed_user
+    # reviews of connected user and user_follows
+    reviews = Review.objects.filter(
+        (Q(user=request.user) | Q(user__in=user_follows)))
+
     # exemple du cours avec Q :
     # blogs = models.Blog.objects.filter(
     #     Q(author__in=request.user.follows) | Q(starred=True))
-    # tickets = Ticket.objects.filter(user__in=users_filter)
 
-    # comment distinguer les tickets avec une critique des tickets sans critique ??
+    # tickets of connected user and users follows
+    # without review
+    tickets = Ticket.objects.filter(
+        (Q(user=request.user) | Q(user__in=user_follows))
+        ).exclude(review__in=reviews)
+    
+    # exemple avec exclude
+    #     photos = models.Photo.objects.filter(
+    #     uploader__in=request.user.follows.all()
+    # ).exclude(blog__in=blogs)
+
+
+    # comment distinguer les tickets avec une critique 
+    # des tickets sans critique ??
 
     # reviews of conneted user and users follows
-    reviews = Review.objects.all()
-    tickets_with_review = []
-    for review in reviews:
-        tickets_with_review.append(review.ticket)
+    # reviews = Review.objects.all()
+
+    # tickets_with_review = []
+    # for review in reviews:
+    #     tickets_with_review.append(review.ticket)
+
+    # merge tickets with review and tickets without review
+    # tickets = chain(
+    #     tickets_with_review.annotate(has_review=Value(True, BooleanField())),
+    #     tickets_without_review.annotate(has_review=Value(False, BooleanField()))
+    # )
 
     tickets_and_reviews = sorted(chain(tickets, reviews),
-                                 key=lambda instance: instance.time_created,
+                                 key=lambda x: x.time_created,
                                  reverse=True)
+
+    # tickets_and_reviews = sorted(tickets,
+    #                              key=lambda x: x.time_created,
+    #                              reverse=True)
 
     # combine tickets and reviews
     # exemple du cours : 
