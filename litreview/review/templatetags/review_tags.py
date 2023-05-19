@@ -1,4 +1,5 @@
 from django import template
+from django.db.models import Q
 from review.models import Review
 
 register = template.Library()
@@ -11,6 +12,6 @@ def model_type(value):
 
 @register.filter
 def has_review(value):
-    reviews = Review.objects.filter(ticket=value)
+    reviews = Review.objects.filter(Q(ticket=value) & ~Q(user=value.user))
     # print(value)
     return reviews

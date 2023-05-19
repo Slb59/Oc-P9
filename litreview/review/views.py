@@ -29,10 +29,10 @@ def feed(request):
     #     Q(author__in=request.user.follows) | Q(starred=True))
 
     # tickets of connected user and users follows
-    # without review
+    # without review => no
     tickets = Ticket.objects.filter(
-        (Q(user=request.user) | Q(user__in=user_follows))
-        ).exclude(review__in=reviews)
+        (Q(user=request.user) | Q(user__in=user_follows)))
+    # ).exclude(review__in=reviews)
     
     # exemple avec exclude
     #     photos = models.Photo.objects.filter(
