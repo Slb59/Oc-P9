@@ -17,7 +17,3 @@ class ReviewAdmin(admin.ModelAdmin):
     list_filter = ["ticket", "time_created"]
     ordering = ["user", "rating"]
     raw_id_fields = ["user", "ticket"]
-
-
-
-

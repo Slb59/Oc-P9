@@ -5,8 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Q, Value, BooleanField
-
+from django.db.models import Q
 from .models import Ticket, Review
 from account.models import UserFollows
 from .forms import TicketForm, ReviewForm
@@ -33,18 +32,14 @@ def feed(request):
     tickets = Ticket.objects.filter(
         (Q(user=request.user) | Q(user__in=user_follows)))
     # ).exclude(review__in=reviews)
-    
+
     # exemple avec exclude
     #     photos = models.Photo.objects.filter(
     #     uploader__in=request.user.follows.all()
     # ).exclude(blog__in=blogs)
 
-
-    # comment distinguer les tickets avec une critique 
+    # comment distinguer les tickets avec une critique
     # des tickets sans critique ??
-
-    # reviews of conneted user and users follows
-    # reviews = Review.objects.all()
 
     # tickets_with_review = []
     # for review in reviews:
@@ -53,19 +48,15 @@ def feed(request):
     # merge tickets with review and tickets without review
     # tickets = chain(
     #     tickets_with_review.annotate(has_review=Value(True, BooleanField())),
-    #     tickets_without_review.annotate(has_review=Value(False, BooleanField()))
+    # tickets_without_review.annotate(has_review=Value(False, BooleanField()))
     # )
 
     tickets_and_reviews = sorted(chain(tickets, reviews),
                                  key=lambda x: x.time_created,
                                  reverse=True)
 
-    # tickets_and_reviews = sorted(tickets,
-    #                              key=lambda x: x.time_created,
-    #                              reverse=True)
-
     # combine tickets and reviews
-    # exemple du cours : 
+    # exemple du cours :
     # blogs_and_photos = sorted(
     #     chain(blogs, photos),
     #     key=lambda instance: instance.date_created,
@@ -137,7 +128,29 @@ class ReviewView(LoginRequiredMixin, View):
 
 class ReviewOnTicketView(LoginRequiredMixin, View):
     """ add a new review on ticket """
-    ...
+    # model = Ticket
+    review_form_class = ReviewForm
+    template_name = 'review/review/add_review.html'
+
+    def get(self, request, id_ticket):
+        ticket = Ticket.objects.get(pk=id_ticket)
+        form = self.review_form_class()
+        context = {'review_form': form,
+                   'ticket': ticket,
+                   'no_add_review': True}
+        return render(request,
+                      'review/review/add_review_on_ticket.html',
+                      context=context)
+
+    def post(self, request, id_ticket):
+        ticket = Ticket.objects.get(pk=id_ticket)
+        review_form = self.review_form_class(request.POST)
+        if review_form.is_valid():
+            form = review_form.save(commit=False)
+            form.ticket = ticket
+            form.user = request.user
+            form.save()
+            return redirect(settings.LOGIN_REDIRECT_URL)
 
 
 class TicketView(LoginRequiredMixin, View):

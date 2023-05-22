@@ -5,11 +5,9 @@
     <form method="POST", enctype="multipart/form-data">
         {% csrf_token %}
         <div>
-            {% include 'review/ticket/add_ticket_form.html' %}
-            <hr class="hr">
+            {% include 'review/ticket/ticket_info.html' with instance=ticket %}
         </div>
         
         {% include 'review/review/review_form.html' %}
-
     </form>
 {% endblock %}
