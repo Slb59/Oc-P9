@@ -12,6 +12,17 @@ def model_type(value):
 
 @register.filter
 def has_review(value):
+    """ value = a ticket
+    exist a review on the ticket from another user
+    """
     reviews = Review.objects.filter(Q(ticket=value) & ~Q(user=value.user))
-    # print(value)
+    return reviews
+
+
+@register.filter
+def my_review(value):
+    """ value = a ticket
+    exist a review on the ticket with same user
+    """
+    reviews = Review.objects.filter(Q(ticket=value) & Q(user=value.user))
     return reviews

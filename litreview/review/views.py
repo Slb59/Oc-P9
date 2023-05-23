@@ -1,9 +1,12 @@
 from itertools import chain
 from django.conf import settings
+from django.urls import reverse_lazy
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.generic import View
+from django.views.generic.edit import DeleteView, UpdateView
+# from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from .models import Ticket, Review
@@ -23,54 +26,45 @@ def feed(request):
     reviews = Review.objects.filter(
         (Q(user=request.user) | Q(user__in=user_follows)))
 
-    # exemple du cours avec Q :
-    # blogs = models.Blog.objects.filter(
-    #     Q(author__in=request.user.follows) | Q(starred=True))
-
     # tickets of connected user and users follows
     # without review => no
     tickets = Ticket.objects.filter(
         (Q(user=request.user) | Q(user__in=user_follows)))
-    # ).exclude(review__in=reviews)
 
-    # exemple avec exclude
-    #     photos = models.Photo.objects.filter(
-    #     uploader__in=request.user.follows.all()
-    # ).exclude(blog__in=blogs)
+    # merge tickets with review and tickets
+    merge_tickets_and_reviews = chain(tickets, reviews)
 
-    # comment distinguer les tickets avec une critique
-    # des tickets sans critique ??
-
-    # tickets_with_review = []
-    # for review in reviews:
-    #     tickets_with_review.append(review.ticket)
-
-    # merge tickets with review and tickets without review
-    # tickets = chain(
-    #     tickets_with_review.annotate(has_review=Value(True, BooleanField())),
-    # tickets_without_review.annotate(has_review=Value(False, BooleanField()))
-    # )
-
-    tickets_and_reviews = sorted(chain(tickets, reviews),
+    # sorted the tickets and reviews by time created reverse               
+    tickets_and_reviews = sorted(merge_tickets_and_reviews,
                                  key=lambda x: x.time_created,
                                  reverse=True)
-
-    # combine tickets and reviews
-    # exemple du cours :
-    # blogs_and_photos = sorted(
-    #     chain(blogs, photos),
-    #     key=lambda instance: instance.date_created,
-    #     reverse=True
-    # )
-    # context = {
-    #     'blogs_and_photos': blogs_and_photos,
-    # }
-    # tickets_and_review = chain(reviews, tickets)
-    # order by the posts by time_created desc
 
     context = {'tickets_and_reviews': tickets_and_reviews}
 
     return render(request, 'review/feed.html', context=context)
+
+
+@login_required
+def posts(request):
+    """ display tickets and reviews of the connected user """
+
+    # reviews of connected user
+    reviews = Review.objects.filter(user=request.user)
+
+    # tickets of connected
+    tickets = Ticket.objects.filter(user=request.user)
+
+    # merge tickets with review and tickets
+    merge_tickets_and_reviews = chain(tickets, reviews)
+
+    # sorted the tickets and reviews by time created reverse               
+    tickets_and_reviews = sorted(merge_tickets_and_reviews,
+                                 key=lambda x: x.time_created,
+                                 reverse=True)
+
+    context = {'tickets_and_reviews': tickets_and_reviews}
+
+    return render(request, 'review/posts.html', context=context)
 
 
 def ticket_detail(request, id):
@@ -171,3 +165,13 @@ class TicketView(LoginRequiredMixin, View):
             form.user = request.user
             form.save()
             return redirect(settings.LOGIN_REDIRECT_URL)
+
+
+class TicketUpdateView(LoginRequiredMixin, UpdateView):
+    model = Ticket
+
+
+class TicketDeleteView(LoginRequiredMixin, DeleteView):
+    model = Ticket
+    template_name = 'review/ticket/ticket_confirm_delete.html'
+    success_url = reverse_lazy('review:posts')

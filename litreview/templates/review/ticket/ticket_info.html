@@ -31,7 +31,13 @@
                {% if not instance|has_review and not instance.user == request.user and not no_add_review %}
                   <a href="{% url 'review:add_review_on_ticket' instance.id %}"><button class="btn">Creer une critique</button></a>
                {% endif %}
-               <!-- TODO: ajouter les boutons modifier,supprimer, sous condition --> 
+               {% if in_posts %}
+               <!-- ajouter les boutons modifier,supprimer, sous condition --> 
+                  <div>
+                     <a href="{% url 'review:update_ticket' instance.id %}"><button class="btn">Modifier</button></a>
+                     <a href="{% url 'review:delete_ticket' instance.id %}"><button class="btn">Supprimer</button></a>
+                  </div>                  
+               {% endif %}
             </div>
          </div>
       </div>

@@ -3,18 +3,12 @@
 {% block content %}
 {% include 'base/message.html'%}
 
-<div class="feed__buttons">
-    <a href="{% url 'review:add_ticket' %}"> <input class='btn' type="button" value="Demander une critique"> </a>
-    <div>  </div>
-    <a href="{% url 'review:add_review' %}"> <input class= 'btn' type="button" value="Créer une critique"> </a>
-</div>
-
 <div class="feed__messages">
     {% for instance in tickets_and_reviews %}
     <!-- for each instance -->
         {% if instance|model_type == 'Ticket' %}
         <!-- if it's a ticket : ticket_info.html -->
-            {% include 'review/ticket/ticket_info.html' with in_posts=False %}
+            {% include 'review/ticket/ticket_info.html' with in_posts=True %}
         {% elif instance|model_type == 'Review' %}
         <!-- if it's a review : review_info.html -->
             {% include 'review/review/review_info.html'%}

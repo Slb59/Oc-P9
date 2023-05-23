@@ -12,4 +12,9 @@ urlpatterns = [
  path('add_review', views.ReviewView.as_view(), name='add_review'),
  path('add_review/<int:id_ticket>', views.ReviewOnTicketView.as_view(),
       name='add_review_on_ticket'),
+ path('posts', views.posts, name='posts'),
+ path('update_ticket/<pk>/', views.TicketUpdateView.as_view(),
+      name='update_ticket'),
+ path('delete_ticket/<pk>/', views.TicketDeleteView.as_view(),
+      name='delete_ticket')
 ]

@@ -11,9 +11,7 @@
             </div>            
         </form>
         <div class ="subscription__message">
-            {% for message in messages%}
-                <p id="messages">{{message}}</p>
-            {% endfor %}
+            {% include 'base/message.html'%}
             {% if form.errors %}
                 <!-- {{ form.errors }} -->
                 {% for field in form %}
