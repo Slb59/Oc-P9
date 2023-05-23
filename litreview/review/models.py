@@ -19,10 +19,11 @@ class Ticket(models.Model):
         return "Ticket: " + self.title
 
     def resize_image(self):
-        image = Image.open(self.image)
-        image.thumbnail(self.IMAGE_MAX_SIZE)
-        # sauvegarde de l'image dans le système de fichiers
-        image.save(self.image.path)
+        if self.image:
+            image = Image.open(self.image)
+            image.thumbnail(self.IMAGE_MAX_SIZE)
+            # sauvegarde de l'image dans le système de fichiers
+            image.save(self.image.path)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

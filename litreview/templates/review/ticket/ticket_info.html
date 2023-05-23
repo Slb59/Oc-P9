@@ -1,4 +1,5 @@
 {% load review_tags %}
+{% load static %}
    <div class="cadre_info">
       <!-- <hr class="hr"> -->
       <div class="ticket_info__1">
@@ -16,13 +17,18 @@
       </div>
       <div class="ticket_info__2">   
          <div>
-            <img src="{{instance.image.url }}">
+            {% if instance.image %}
+               <img src="{{instance.image.url }}">
+            {% else %}
+               <img src="{% static 'assets/default_image.png'%}">
+            {% endif %}
+            
          </div>
          <div class="ticket_info__2__text">
             {{ instance.description|linebreaks }}
             <div>
                <!-- draw the button "creer une critique" if ticket is without review  -->
-               {% if not instance|has_review and not instance.user == request.user and not no_add_review%}
+               {% if not instance|has_review and not instance.user == request.user and not no_add_review %}
                   <a href="{% url 'review:add_review_on_ticket' instance.id %}"><button class="btn">Creer une critique</button></a>
                {% endif %}
                <!-- TODO: ajouter les boutons modifier,supprimer, sous condition --> 
