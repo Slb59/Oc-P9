@@ -151,6 +151,7 @@ class TicketView(LoginRequiredMixin, View):
     """ add a new ticket """
     form_class = TicketForm
     template_name = 'review/ticket/add_ticket.html'
+    raise_exception = True
 
     def get(self, request):
         form = self.form_class()
