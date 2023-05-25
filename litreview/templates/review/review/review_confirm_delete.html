@@ -4,13 +4,9 @@
 <div class="center">
 	<form method="post">
 		{% csrf_token %}
-		<div class = 'div_title'>Supprimer un ticket</div>
-		<p>Attention : Vous êtes sur le point de supprimer ce ticket
-            {% if ticket|has_review %}
-                qui a une critique enregistrée par un autre utilisateur
-            {% endif %}
-            :
-            {% include 'review/ticket/ticket_info.html' with instance=ticket ticket_posts=False %}
+		<div class = 'div_title'>Supprimer une critique</div>
+		<p>Vous êtes sur le point de supprimer cette critique
+            {% include 'review/review/review_info.html' with instance=review review_posts=False %}
         </p>
 		<p class="form-buttons">
             <button class="btn" type="submit" >Confirmer</button>

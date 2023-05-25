@@ -8,10 +8,10 @@
     <!-- for each instance -->
         {% if instance|model_type == 'Ticket' %}
         <!-- if it's a ticket : ticket_info.html -->
-            {% include 'review/ticket/ticket_info.html' with in_posts=True %}
+            {% include 'review/ticket/ticket_info.html' with ticket_posts=True %}
         {% elif instance|model_type == 'Review' %}
         <!-- if it's a review : review_info.html -->
-            {% include 'review/review/review_info.html'%}
+            {% include 'review/review/review_info.html' with review_posts=True %}
         {% endif %}
     {% endfor %}
 </div>

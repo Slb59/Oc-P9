@@ -179,3 +179,16 @@ class TicketDeleteView(LoginRequiredMixin, DeleteView):
     model = Ticket
     template_name = 'review/ticket/ticket_confirm_delete.html'
     success_url = reverse_lazy('review:posts')
+
+
+class ReviewUpdateView(LoginRequiredMixin, UpdateView):
+    model = Review
+    fields = ['headline', 'body', 'rating']
+    template_name = 'review/review/review_update.html'
+    success_url = '/posts'
+
+
+class ReviewDeleteView(LoginRequiredMixin, DeleteView):
+    model = Review
+    template_name = 'review/review/review_confirm_delete.html'
+    success_url = reverse_lazy('review:posts')
