@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from django.views.generic import View
+from django.views.generic import View, TemplateView
 # from django.views.generic import CreateView
 # from django.urls import reverse_lazy
 # from django.db import IntegrityError
@@ -14,6 +14,10 @@ from django.views.generic import View
 from .forms import LoginUser, CreateUser
 from .forms import SubscriptionForm
 from .models import UserFollows
+
+
+class Error403View(TemplateView):
+    template_name = 'base/403.html'
 
 
 def unsubscribe(request, id):
