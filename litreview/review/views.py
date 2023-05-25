@@ -170,6 +170,9 @@ class TicketView(LoginRequiredMixin, View):
 
 class TicketUpdateView(LoginRequiredMixin, UpdateView):
     model = Ticket
+    fields = ['title', 'description', 'image']
+    template_name = 'review/ticket/ticket_update.html'
+    success_url = '/posts'
 
 
 class TicketDeleteView(LoginRequiredMixin, DeleteView):
