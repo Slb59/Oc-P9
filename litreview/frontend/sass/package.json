@@ -4,7 +4,7 @@
   "description": "litreview application",
   "main": "index.js",
   "scripts": {
-    "sass": "sass --watch ./sass/review.scss:./css/review.css"
+    "sass": "sass --watch ./review.scss:../../static/css/review.css"
   },
   "author": "",
   "license": "ISC"
