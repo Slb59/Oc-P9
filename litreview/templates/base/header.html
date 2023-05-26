@@ -1,22 +1,12 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-    <head>
-    <title>{% block title %}{% endblock %}</title>
-    <link href="{% static "css/review.css" %}" rel="stylesheet">
-    <!-- <link href="../static/css/review.css" rel="stylesheet"> -->
-    </head>
-
-    <body>
-        <header id="header">
-            <a href="{% url 'review:feed' %}"><h1>LITREVIEW</h1></a>
-            
-            {% if user.is_authenticated %}
-                <div class="user_connected">
-                <p>Vous êtes connecté en tant que {{request.user}}</p>
-                </div>
-                <nav class="header__menu">
-                    {% include 'navbar/navbar.html' %}                
-                </nav>
-            {% endif %}
-        </header>
+<header id="header">
+    <a href="{% url 'review:feed' %}"><h1>LITREVIEW</h1></a>
+    
+    {% if user.is_authenticated %}
+        <div class="user_connected">
+        <p>Vous êtes connecté en tant que {{request.user}}</p>
+        </div>
+        <nav class="header__menu">
+            {% include 'navbar/navbar.html' %}                
+        </nav>
+    {% endif %}
+</header>

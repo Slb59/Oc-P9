@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class = 'div_title'>Modifier une critique</div>
+    <form method="POST", enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            {% include 'review/ticket/ticket_info.html' with instance=review.ticket %}
+        </div>
+        
+        {% include 'review/review/review_form.html' with review_form=form %}
+
+    </form>
+{% endblock %}

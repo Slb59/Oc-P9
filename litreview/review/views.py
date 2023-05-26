@@ -170,7 +170,8 @@ class TicketView(LoginRequiredMixin, View):
 
 class TicketUpdateView(LoginRequiredMixin, UpdateView):
     model = Ticket
-    fields = ['title', 'description', 'image']
+    # fields = ['title', 'description', 'image']
+    form_class = TicketForm
     template_name = 'review/ticket/ticket_update.html'
     success_url = '/posts'
 
@@ -183,7 +184,8 @@ class TicketDeleteView(LoginRequiredMixin, DeleteView):
 
 class ReviewUpdateView(LoginRequiredMixin, UpdateView):
     model = Review
-    fields = ['headline', 'body', 'rating']
+    form_class = ReviewForm
+    # fields = ['headline', 'body', 'rating']
     template_name = 'review/review/review_update.html'
     success_url = '/posts'
 

@@ -7,7 +7,7 @@ class TicketForm(ModelForm):
 
     title = forms.CharField(
         widget=forms.widgets.TextInput(
-            attrs={'placeholder': "Titre"}))
+            attrs={'placeholder': "Titre", 'size': 100}))
 
     description = forms.CharField(
         widget=forms.widgets.Textarea(
