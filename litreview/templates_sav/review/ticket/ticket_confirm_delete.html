@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+{% load review_tags %}
+{%block content%}
+<div class="center">
+	<form method="post">
+		{% csrf_token %}
+		<div class = 'div_title'>Supprimer un ticket</div>
+		<p>Attention : Vous êtes sur le point de supprimer ce ticket
+            {% if ticket|has_review %}
+                qui a une critique enregistrée par un autre utilisateur
+            {% endif %}
+            :
+            {% include 'review/ticket/ticket_info.html' with instance=ticket ticket_posts=False %}
+        </p>
+		<p class="form-buttons">
+            <button class="btn" type="submit" >Confirmer</button>
+			
+			<a href="{% url 'review:posts'%}"><button class="btn" type="button">Annuler</button></a>
+		</p>
+	</form>
+</div>
+
+{%endblock content%}

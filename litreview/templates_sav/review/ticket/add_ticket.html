@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class = 'div_title'>Créer un ticket</div>
+    <div class="add_ticket">
+
+    <form method="POST" enctype="multipart/form-data">
+        {% include 'review/ticket/add_ticket_form.html' %}
+        <div><button class="btn" type="submit" >Envoyer</button></div>
+    </form>
+    </div>
+{% endblock %}

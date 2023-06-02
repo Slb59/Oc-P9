@@ -1,0 +1,46 @@
+{% load review_tags %}
+{% load static %}
+   <div class="cadre_info">
+      <!-- <hr class="hr"> -->
+      <div class="ticket_info__1">
+         {% if instance.user == request.user %}
+            <p>Vous avez demandé une critique</p>
+         {% else %}
+            <p>{{instance.user|title}} a demandé une critique</p>
+         {% endif %}
+         <p class="ticket_info__date">
+            {{ instance.time_created | time}}, {{ instance.time_created | date}}
+         </p>
+      </div>
+      <div>
+         <p>{{ instance.title }}</p>
+      </div>
+      <div class="ticket_info__2">   
+         <div>
+            {% if instance.image %}
+               <img src="{{instance.image.url }}">
+            {% else %}
+               <img src="{% static 'assets/default_image.png'%}">
+            {% endif %}
+            
+         </div>
+         <div class="ticket_info__2__text">
+            {{ instance.description|linebreaks }}
+            <div>
+               <!-- draw the button "creer une critique" if ticket is without review  -->
+               {% if not instance|has_review and not instance.user == request.user and not no_add_review %}
+                  <a href="{% url 'review:add_review_on_ticket' instance.id %}"><button class="btn">Creer une critique</button></a>
+               {% endif %}
+               {% if ticket_posts %}
+               <!-- ajouter les boutons modifier,supprimer, sous condition --> 
+                  <div>
+                     <a href="{% url 'review:update_ticket' instance.id %}"><button class="btn">Modifier</button></a>
+                     <a href="{% url 'review:delete_ticket' instance.id %}"><button class="btn">Supprimer</button></a>
+                  </div>                  
+               {% endif %}
+            </div>
+         </div>
+      </div>
+
+   </div>
+   

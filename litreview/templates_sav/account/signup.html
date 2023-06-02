@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class = 'signup'>
+    <div class = 'div_title'>Inscrivez-vous</div>
+    
+    <div class = 'div_form'>
+        <form method="post">            
+            {% csrf_token %}
+            {{form.username}}
+            {{form.password1}}
+            {{form.password2}}
+            <div>
+                <a href="{% url 'account:login' %}"><button class="btn" type="button">Retourner</button></a>
+                <button class="btn" type="submit" >S'inscrire</button>                
+            </div>
+        </form>
+    </div>   
+</div>  
+<div class ="signup__message">
+    {% include 'base/message.html'%}
+    {% if form.errors %}
+        {{ form.errors }}
+    {% endif %}
+</div>
+{% endblock %}

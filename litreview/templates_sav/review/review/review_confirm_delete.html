@@ -1,0 +1,19 @@
+{%extends 'base.html'%}
+{% load review_tags %}
+{%block content%}
+<div class="center">
+	<form method="post">
+		{% csrf_token %}
+		<div class = 'div_title'>Supprimer une critique</div>
+		<p>Vous êtes sur le point de supprimer cette critique
+            {% include 'review/review/review_info.html' with instance=review review_posts=False %}
+        </p>
+		<p class="form-buttons">
+            <button class="btn" type="submit" >Confirmer</button>
+			
+			<a href="{% url 'review:posts'%}"><button class="btn" type="button">Annuler</button></a>
+		</p>
+	</form>
+</div>
+
+{%endblock content%}
