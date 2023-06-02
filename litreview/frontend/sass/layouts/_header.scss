@@ -11,7 +11,6 @@ header {
         color: $color-font-h1
     }
     
-
     .header__menu {       
         
         padding-top: 0em;
@@ -35,4 +34,31 @@ header {
             }
         }
     }
+
+    // .navbar {       
+        
+    //     padding-top: 0em;
+    //     padding-right: 0em;
+    //     grid-column: 4;
+    //     margin: auto 1em;
+    //     align-content: center;
+    //     text-align: right;   
+    //     // transform: translateY(-120%);
+
+    //     .navbar-nav{
+    //         margin: 0;
+    //     }
+        
+    //     .nav_item {
+    //         display: inline;
+    //         padding-left: 0.5em;           
+
+    //         .nav-link {
+    //             text-decoration: none;
+    //         }
+    //     }
+    // }
 }
+
+
+
