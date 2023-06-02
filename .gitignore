@@ -8,3 +8,6 @@ __pycache__
 
 # no logs file
 *.log
+
+# no bootstrap lib
+node_modules
