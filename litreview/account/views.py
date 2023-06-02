@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
+# from django.shortcuts import render_to_response
 
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -10,14 +11,22 @@ from django.views.generic import View, TemplateView
 # from django.views.generic import CreateView
 # from django.urls import reverse_lazy
 # from django.db import IntegrityError
+# from django.template import RequestContext
 
 from .forms import LoginUser, CreateUser
 from .forms import SubscriptionForm
 from .models import UserFollows
 
 
-class Error403View(TemplateView):
-    template_name = 'base/403.html'
+# class Error403View(TemplateView):
+#     template_name = 'base/403.html'
+
+
+# def handler404(request, *args, **argv):
+#     response = render_to_response('base/404.html', {},
+#                                   context_instance=RequestContext(request))
+#     response.status_code = 404
+#     return response
 
 
 def unsubscribe(request, id):
