@@ -1,12 +1,12 @@
 # LitReview
 
-<< mettre une miniature du site ici >>
+![login](assets/login.png)
 
 ## Objectif
 Ce programme est un exercice proposé par [OpenClassRooms](https://openclassrooms.com/fr/) dans le cadre de la formation :
 Développeur d'applications Python. L'objectif est de développer une application web permettant aux utilisateurs de consulter ou de solliciter une critique de livres à la demande.
 
-<< mettre une  image d'une page ici >>
+![feed](assets/feed.png)
 
 ## Fonctionnalités
 L'application MVP LitReview permet de :

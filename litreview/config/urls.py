@@ -34,6 +34,11 @@ if settings.DEBUG:
     # This allows the error pages to be debugged during development.
     urlpatterns += [
         path(
+             "400/",
+             default_views.bad_request,
+             kwargs={"exception": Exception("Bad Request!")},
+         ),
+        path(
             "403/",
             default_views.permission_denied,
             kwargs={"exception": Exception("Permission Denied")},

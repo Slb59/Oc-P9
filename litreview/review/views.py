@@ -25,7 +25,7 @@ def feed(request):
     # reviews of connected user and user_follows
     reviews = Review.objects.filter(
         (Q(user=request.user) | Q(user__in=user_follows)))
-    
+
     # reviews of the connected user tickets
     tickets_user = Ticket.objects.filter(user=request.user)
     reviews_from_ticket_user = Review.objects.filter(
