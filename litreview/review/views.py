@@ -41,7 +41,7 @@ def feed(request):
     merge_tickets_and_reviews = chain(
         merge_tickets_and_reviews, reviews_from_ticket_user)
 
-    # sorted the tickets and reviews by time created reverse               
+    # sorted the tickets and reviews by time created reverse           
     tickets_and_reviews = sorted(merge_tickets_and_reviews,
                                  key=lambda x: x.time_created,
                                  reverse=True)
@@ -64,7 +64,7 @@ def posts(request):
     # merge tickets with review and tickets
     merge_tickets_and_reviews = chain(tickets, reviews)
 
-    # sorted the tickets and reviews by time created reverse               
+    # sorted the tickets and reviews by time created reverse
     tickets_and_reviews = sorted(merge_tickets_and_reviews,
                                  key=lambda x: x.time_created,
                                  reverse=True)
